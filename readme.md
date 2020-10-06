@@ -15,7 +15,7 @@ Do Migration
 5-$ php artisan migrate
 
 
-Create Pisher App
+Create Pusher App
 
 6- Create and setup pusher account
 
