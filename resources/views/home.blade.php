@@ -15,6 +15,7 @@
                         @endif
                        <div class="media">
                            <div class="media-left">
+                               
                                <img src="{{$user->image}}" class="media-object">
                            </div>
                            <div class="media-body">
