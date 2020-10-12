@@ -1,3 +1,4 @@
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -7,7 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-
+Vue.component('home', require('./components/Home.vue'));
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -30,3 +31,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+if (window.Notification) {
+    console.log('Notifications are supported!');
+} else {
+    alert('Notifications aren\'t supported on your browser! :');
+}
+

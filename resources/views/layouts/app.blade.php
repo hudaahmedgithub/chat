@@ -103,7 +103,7 @@
         .message-wrapper {
             padding: 10px;
             height: 536px;
-            background: #eeeeee;
+            background: #eee;
         }
 
         .messages .message {
@@ -119,14 +119,12 @@
             padding: 3px 10px;
             border-radius: 10px;
         }
-
-        .received {
-            background: #028;
+       .received {
+            background: #04a;
             color: aliceblue;
         }
-
-        .sent {
-            background: #37f;
+      .sent {
+            background: #2ab;
             float: right;
             text-align: right;
             color: aliceblue
@@ -137,7 +135,7 @@
         }
 
         .date {
-            color: #ddd;
+            color: #eee;
             font-size: 12px;
         }
 
@@ -269,7 +267,7 @@
             receiver_id = $(this).attr('id');
             $.ajax({
                 type: "get",
-                url: "message/" + receiver_id, // need to create this route
+                url: "message/" + receiver_id, 
                 data: "",
                 cache: false,
                 success: function (data) {
@@ -289,7 +287,7 @@
                 var datastr = "receiver_id=" + receiver_id + "&message=" + message;
                 $.ajax({
                     type: "post",
-                    url: "message", // need to create this post route
+                    url: "message", 
                     data: datastr,
                     cache: false,
                     success: function (data) {

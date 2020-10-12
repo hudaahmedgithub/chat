@@ -4,7 +4,9 @@
                 
                 <li class="message clearfix">
                    <div class="{{($message->from==Auth::id()) ? 'sent' : 'received'}}">
-                       
+                   <?php $message->is_read=1;
+                       $message->save();
+                       ?>
                     <p> {{$message->message}} </p>
                      <p class="date">{{date('d M y h:i a' ,strtotime($message->created_at))}}</p>
                     </div>

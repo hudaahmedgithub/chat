@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Message;
+use App\Dash_Notification;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Pusher\Pusher;
+use App\Events\FormSubmitted;
 class HomeController extends Controller
 {
     /**
@@ -32,6 +34,7 @@ class HomeController extends Controller
         from users LEFT  JOIN  messages ON users.id = messages.from and is_read = 0 and messages.to = " . Auth::id() . "
         where users.id != " . Auth::id() . " 
         group by users.id, users.name, users.image, users.email");
+       
         return view('home', ['users' => $users]);
         
     }
@@ -46,6 +49,7 @@ class HomeController extends Controller
             $jquery->where('from',$user_id)->where('to',$my_id);
      
         })->get();
+     
         return view('messages.index',['messages'=>$messages]);
     }
     
@@ -75,9 +79,14 @@ class HomeController extends Controller
         $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
         $pusher->trigger('my-channel', 'my-event', $data);
   }
+    
+    public function popMessage()
+    {
+        $text=request()->text;
+        event (new FormSubmitted($text));
+        $not=new Dash_Notification();
+        $not->text=$text;
+        $not->save();
+        
+   }
 }
-
-
-
-
-

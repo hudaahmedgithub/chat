@@ -3,15 +3,15 @@
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
         <div class="form-group">
-          <label for="title">Post Title</label>
-          <input v-model="newPostTitle" id="title" type="text" class="form-control">
+          <label for="title">Message Title</label>
+          <input v-model="newNotTitle" id="title" type="text" class="form-control">
         </div>
         <div class="form-group">
-          <label for="description">Post Description</label>
-          <textarea v-model="newPostDesc" id="description" rows="8" class="form-control"></textarea>
+          <label for="description">Message Body</label>
+          <textarea v-model="newNotBody" id="body" rows="8" class="form-control"></textarea>
         </div>
-        <button @click="addPost(newPostTitle, newPostDesc)" 
-          :class="{disabled: (!newPostTitle || !newPostDesc)}"
+        <button @click="addNotify(newNotTitle, newNotBody)" 
+          :class="{disabled: (!newNotTitle || !newNotBody)}"
           class="btn btn-block btn-primary">Submit</button>
       </div>
     </div>
@@ -19,28 +19,29 @@
 </template>
 
 <script>
+
   export default {
     data() {
       return {
-        newPostTitle: "", 
-        newPostDesc: "" 
+        newNotTitle: "", 
+        newNotBody: "" 
       }
     },
     created() {
       this.listenForChanges();
     },
     methods: {
-      addPost(postName, postDesc) {
+      addNotify(notTitle, notBody) {
         // check if entries are not empty
-        if(!postName || !postDesc)
+        if(!notTitle || !notBody)
           return;
 
         // make API to save post
         axios.post('/api/post', {
-          title: postName, description: postDesc
+          title: notTitle, description: notBody
         }).then( response => {
           if(response.data) { 
-            this.newPostTitle = this.newPostDesc = "";
+            this.newNotTitle = this.newNotBody = "";
           }
         })
       },
@@ -65,6 +66,8 @@
             });
           })
         }
-      } 
+      }
+      
     }
+    
 </script>

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+<script defer src="{{ mix('js/app.js') }}"></script>
 <div class="container-fluid">
     <div class="row">
          <div class="col-md-4">
@@ -34,4 +36,21 @@
           
     </div>
 </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('50499dff65d399f3d037', {
+      cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('form-submitted', function(data) {
+       alert(data.text);
+    });
+  </script>
 @endsection
